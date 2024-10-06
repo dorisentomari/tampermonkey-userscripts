@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES5", // 编译成的目标版本
+    "module": "ES6", // 使用的模块系统
+    "strict": true, // 开启严格模式
+    "esModuleInterop": true, // 兼容 ES 模块
+    "skipLibCheck": true, // 跳过库文件的类型检查
+    "forceConsistentCasingInFileNames": true // 强制文件名称一致性
+  },
+  "include": ["userscripts/**/*"], // 需要编译的目录
+  "exclude": ["node_modules", "dist"]
+}
