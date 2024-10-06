@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    tankUtil: any;
+    tankUtils: any;
   }
 }
 

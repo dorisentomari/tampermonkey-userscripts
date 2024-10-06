@@ -1,3 +1,7 @@
+const fs = require('fs');
+const path = require('path');
+const paths = require('./paths');
+
 function parseTemplate(template, variables) {
   // 使用正则表达式匹配 ${key} 格式的变量
   return template.replace(/\${(.*?)}/g, (match, key) => {
@@ -34,8 +38,33 @@ function parseTampermonkeyBanner(bannerList) {
     .join('\n');
 }
 
+function updateVersion(version, level = 'z') {
+  const [x, y, z] = version.split('.').map(Number);
+
+  if (level === 'x') {
+    return `${x + 1}.0.0`;
+  } else if (level === 'y') {
+    return `${x}.${y + 1}.0`;
+  } else if (level === 'z') {
+    return `${x}.${y}.${z + 1}`;
+  } else {
+    throw new Error('Invalid level. Use "x", "y", or "z".');
+  }
+}
+
+function updateConfigJson(config) {
+  config.version = updateVersion(config.version);
+
+  fs.writeFileSync(
+    path.resolve(paths.appBuild, `${config.name}/config.json`),
+    JSON.stringify(config, null, 2),
+  );
+}
+
 module.exports = {
   parseTemplate,
   BannerMap,
   parseTampermonkeyBanner,
+  updateVersion,
+  updateConfigJson,
 };

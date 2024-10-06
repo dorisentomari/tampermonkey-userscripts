@@ -1,0 +1,8 @@
+{
+  "version": "1.1.7",
+  "name": "zhihu.answer.detail.page",
+  "shortName": "zadp",
+  "title": "知乎单个回答详情页移除多余元素",
+  "desc": "知乎单个回答详情页移除多余元素，用来截图或分享图",
+  "webpackFileName": "zhihu.answer.detail.page/webpack.config.js"
+}

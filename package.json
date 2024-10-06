@@ -4,10 +4,10 @@
   "description": "油猴脚本构建，可以构建多个脚本",
   "scripts": {
     "prettier": "prettier --write .",
-    "zasp:dev": "webpack serve --config ./build/webpack.config.zhihu.answer.detail.page.js --mode=development",
-    "zasp:build": "webpack --config ./build/webpack.config.zhihu.answer.detail.page.js --mode=production",
-    "tank.utils:dev": "webpack serve --config ./build/webpack.config.tank.utils.js --mode=development",
-    "tank.utils:build": "webpack --config ./build/webpack.config.tank.utils.js --mode=production"
+    "zasp:dev": "webpack serve --config ./build/zhihu.answer.detail.page/webpack.config.js --mode=development",
+    "zasp:build": "webpack --config ./build/zhihu.answer.detail.page/webpack.config.js --mode=production",
+    "tank.utils:dev": "webpack serve --config ./build/tank.utils/webpack.config.js --mode=development",
+    "tank.utils:build": "webpack --config ./build/tank.utils/webpack.config.js --mode=production"
   },
   "keywords": [],
   "author": "",

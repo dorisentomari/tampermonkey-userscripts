@@ -1,4 +1,6 @@
-const tankUtil = {
+const ua = window.navigator.userAgent;
+
+export const tankUtils = {
   checkIsPlainObject,
   checkIsValidDom,
   commonSetDomStyle,
@@ -17,10 +19,14 @@ const tankUtil = {
   commonSetDomListStyleCssText,
   findDom,
   findDomList,
+  isPC: !ua.includes('Android') && !ua.includes('iPhone'),
+  isMobile: ua.includes('Android') || ua.includes('iPhone'),
+  isAndroid: ua.includes('Android'),
+  isIPhone: ua.includes('iPhone'),
 };
 
 if (typeof window !== 'undefined') {
-  window.tankUtil = tankUtil;
+  window.tankUtils = tankUtils;
 }
 
 /**

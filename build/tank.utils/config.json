@@ -1,0 +1,8 @@
+{
+  "version": "1.2.5",
+  "name": "tank.utils",
+  "shortName": "tu",
+  "title": "tank utils 通用js工具脚本",
+  "desc": "通用js工具脚本，各种常用的工具",
+  "webpackFileName": "tank.utils/webpack.config.js"
+}

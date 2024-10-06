@@ -5,26 +5,19 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const paths = require('./paths');
-const baseConfig = require('./webpack.base.js');
-const utils = require('./utils');
-const commonConfig = require('./config.js');
+const paths = require('../paths');
+const webpackBaseConfig = require('../webpack.base.js');
+const utils = require('../utils');
+const commonConfig = require('../common.config');
+const config = require('./config.json');
 
 const BannerMap = utils.BannerMap;
 const parseTampermonkeyBanner = utils.parseTampermonkeyBanner;
 const argv = yargs(hideBin(process.argv)).argv;
 
-const config = {
-  name: 'tank.utils',
-  shortName: 'tu',
-  title: 'tank util 通用js工具脚本',
-  desc: '通用js工具脚本，各种常用的工具',
-  webpackFileName: 'webpack.config.tank.utils.js',
-};
-
 const { name } = config;
 
-module.exports = merge(baseConfig, {
+module.exports = merge(webpackBaseConfig, {
   mode: 'development',
 
   entry: resolve(paths.appUserscripts, `${name}.tsx`),
@@ -36,7 +29,7 @@ module.exports = merge(baseConfig, {
 
   devServer: {
     static: resolve(paths.appDist, `${name}.js`),
-    port: 4400,
+    port: 4300,
   },
 
   plugins: [
@@ -50,15 +43,17 @@ module.exports = merge(baseConfig, {
       // 保持原样
       raw: true,
       banner: () => {
+        utils.updateConfigJson(config);
         const bannerList = [
           { type: BannerMap.PURE_TEXT, text: '==UserScript==' },
           { type: BannerMap.MATCH_TAB, variable: 'name', value: config.title },
-          { type: BannerMap.MATCH_TAB, variable: 'version', value: '1.2' },
+          { type: BannerMap.MATCH_TAB, variable: 'namespace', value: 'http://tampermonkey.net' },
+          { type: BannerMap.MATCH_TAB, variable: 'version', value: config.version },
           { type: BannerMap.MATCH_TAB, variable: 'description', value: config.desc },
           { type: BannerMap.MATCH_TAB, variable: 'author', value: commonConfig.userInfo.author },
-          { type: BannerMap.MATCH_TAB, variable: 'match', value: '*://*/*' },
-          { type: BannerMap.MATCH_TAB, variable: 'grant', value: 'none' },
+          { type: BannerMap.MATCH_TAB, variable: 'match', value: 'https://www.zhihu.com/*' },
           { type: BannerMap.MATCH_TAB, variable: 'license', value: 'MIT' },
+          { type: BannerMap.MATCH_TAB, variable: 'grant', value: 'none' },
           { type: BannerMap.PURE_TEXT, text: '==/UserScript==' },
           { type: BannerMap.EMPTY_LINE, lines: 2 },
         ];

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["es2015", "dom"],
     "target": "ES5", // 编译成的目标版本
     "module": "ES6", // 使用的模块系统
     "strict": true, // 开启严格模式
