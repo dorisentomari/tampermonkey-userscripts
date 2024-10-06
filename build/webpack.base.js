@@ -1,16 +1,11 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const paths = require('./paths');
 
 module.exports = {
   mode: 'development',
 
-  output: {
-    filename: 'bundle.js', // 输出文件
-    path: paths.appDist,
-  },
-
-  devtool: 'inline-source-map',
+  devtool: false,
 
   devServer: {
     static: paths.appDist, // 开发服务器提供静态文件服务的目录
@@ -48,7 +43,18 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.less', '.css'],
   },
 
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
+  optimization: {
+    minimize: false,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false, // 移除所有注释
+          },
+          sourceMap: false, // 不生成 source map
+        },
+        extractComments: false, // 不提取注释到单独文件
+      }),
+    ],
+  },
 };

@@ -15,11 +15,11 @@ const parseTampermonkeyBanner = utils.parseTampermonkeyBanner;
 const argv = yargs(hideBin(process.argv)).argv;
 
 const config = {
-  name: 'zhihu.answer.detail.page',
-  shortName: 'zadp',
-  title: '知乎答案详情页',
-  desc: '知乎答案详情页，用来截图或分享图',
-  webpackFileName: 'webpack.config.zhihu.answer.detail.page.js',
+  name: 'tank.utils',
+  shortName: 'tu',
+  title: 'tank util 通用js工具脚本',
+  desc: '通用js工具脚本，各种常用的工具',
+  webpackFileName: 'webpack.config.tank.utils.js',
 };
 
 const { name } = config;
@@ -36,7 +36,7 @@ module.exports = merge(baseConfig, {
 
   devServer: {
     static: resolve(paths.appDist, `${name}.js`),
-    port: 4300,
+    port: 4400,
   },
 
   plugins: [
@@ -56,13 +56,9 @@ module.exports = merge(baseConfig, {
           { type: BannerMap.MATCH_TAB, variable: 'version', value: '1.2' },
           { type: BannerMap.MATCH_TAB, variable: 'description', value: config.desc },
           { type: BannerMap.MATCH_TAB, variable: 'author', value: commonConfig.userInfo.author },
-          { type: BannerMap.MATCH_TAB, variable: 'match', value: 'https://www.zhihu.com/*' },
-          {
-            type: BannerMap.MATCH_TAB,
-            variable: 'require',
-            value: 'http://file.ikite.top/cdn/html2canvas.min.js',
-          },
+          { type: BannerMap.MATCH_TAB, variable: 'match', value: '*://*/*' },
           { type: BannerMap.MATCH_TAB, variable: 'grant', value: 'none' },
+          { type: BannerMap.MATCH_TAB, variable: 'license', value: 'MIT' },
           { type: BannerMap.PURE_TEXT, text: '==/UserScript==' },
           { type: BannerMap.EMPTY_LINE, lines: 2 },
         ];

@@ -38,7 +38,7 @@ module.exports = {
   // public 资源目录
   appPublic: resolveApp('public'),
   // public 目录下的 index.html 文件
-  appHtml: resolveApp('public/index.html'),
+  appPublicHtml: resolveApp('public/index.html'),
 
   // 解析 env 环境变量
   dotenv: resolveApp('.env'),

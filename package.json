@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "description": "油猴脚本构建，可以构建多个脚本",
   "scripts": {
-    "知乎:回答详情:开发": "webpack serve --config ./build/webpack.config.zhihu.answer.detail.page.js",
-    "知乎:回答详情:构建": "webpack --config ./build/webpack.config.zhihu.answer.detail.page.js",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "zasp:dev": "webpack serve --config ./build/webpack.config.zhihu.answer.detail.page.js --mode=development",
+    "zasp:build": "webpack --config ./build/webpack.config.zhihu.answer.detail.page.js --mode=production",
+    "tank.utils:dev": "webpack serve --config ./build/webpack.config.tank.utils.js --mode=development",
+    "tank.utils:build": "webpack --config ./build/webpack.config.tank.utils.js --mode=production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/yargs": "^17.0.33",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "terser-webpack-plugin": "^5.3.10",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
