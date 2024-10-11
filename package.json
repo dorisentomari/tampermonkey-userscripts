@@ -4,16 +4,24 @@
   "description": "油猴脚本构建，可以构建多个脚本",
   "scripts": {
     "prettier": "prettier --write .",
-    "zasp:dev": "webpack serve --config ./build/zhihu.answer.detail.page/webpack.config.js --mode=development",
-    "zasp:build": "webpack --config ./build/zhihu.answer.detail.page/webpack.config.js --mode=production",
-    "tank.utils:dev": "webpack serve --config ./build/tank.utils/webpack.config.js --mode=development",
-    "tank.utils:build": "webpack --config ./build/tank.utils/webpack.config.js --mode=production"
+    "zadp:dev": "node ./build/runCmd.js --block-code zadp --mode development",
+    "zadp:build": "node ./build/runCmd.js --block-code zadp --mode production",
+    "tank.utils:dev": "node ./build/runCmd.js --block-code tank.utils --mode development",
+    "tank.utils:build": "node ./build/runCmd.js --block-code tank.utils --mode production",
+    "third.lib:lodash:dev": "node ./build/runCmd.js --block-code third.lib --mode development --lib lodash",
+    "third.lib:lodash:build": "node ./build/runCmd.js --block-code third.lib --mode production --lib lodash",
+    "third.lib:jquery:dev": "node ./build/runCmd.js --block-code third.lib --mode development --lib jquery",
+    "third.lib:jquery:build": "node ./build/runCmd.js --block-code third.lib --mode production --lib jquery"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jquery": "^3.5.31",
+    "@types/lodash": "^4.17.10",
     "@types/yargs": "^17.0.33",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.3.3",
     "react": "^18.3.1",

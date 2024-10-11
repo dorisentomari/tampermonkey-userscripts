@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const fs = require('fs');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const yargs = require('yargs/yargs');
@@ -16,17 +15,33 @@ const BannerMap = utils.BannerMap;
 const parseTampermonkeyBanner = utils.parseTampermonkeyBanner;
 const argv = yargs(hideBin(process.argv)).argv;
 
-const { name } = config;
+const { name, moduleMap } = config;
 
-function tankUtilsWebpackConfig(env) {
+function thirdLibWebpackConfig(env) {
+  const lib = env.lib;
+  if (!lib) {
+    throw new Error('lib 参数不存在');
+  }
+  const libObj = require(lib);
+
+  const libItem = moduleMap[lib];
+  if (!libItem) {
+    throw new Error('lib 配置不存在');
+  }
+
+  let version = libObj[libItem.versionField];
+  if (!version) {
+    version = libItem.version;
+  }
+
   return {
     mode: 'development',
 
-    entry: path.resolve(paths.appUserscripts, `${name}.tsx`),
+    entry: path.resolve(paths.appUserscripts, `${name}.${lib}.tsx`),
 
     output: {
       path: paths.appDist,
-      filename: `${name}.js`,
+      filename: `${name}.${lib}.js`,
     },
 
     devServer: {
@@ -46,12 +61,13 @@ function tankUtilsWebpackConfig(env) {
         // 保持原样
         raw: true,
         banner: () => {
-          utils.updateConfigJson(config);
           const bannerList = [
             { type: BannerMap.PURE_TEXT, text: '==UserScript==' },
             { type: BannerMap.MATCH_TAB, variable: 'name', value: config.title },
             { type: BannerMap.MATCH_TAB, variable: 'namespace', value: 'http://tampermonkey.net' },
-            { type: BannerMap.MATCH_TAB, variable: 'version', value: config.version },
+            { type: BannerMap.MATCH_TAB, variable: 'lib-name', value: lib },
+            { type: BannerMap.MATCH_TAB, variable: 'lib-version', value: version },
+            { type: BannerMap.MATCH_TAB, variable: 'version', value: version },
             { type: BannerMap.MATCH_TAB, variable: 'description', value: config.desc },
             { type: BannerMap.MATCH_TAB, variable: 'author', value: commonConfig.userInfo.author },
             { type: BannerMap.MATCH_TAB, variable: 'match', value: '*://*/*' },
@@ -68,5 +84,5 @@ function tankUtilsWebpackConfig(env) {
 }
 
 module.exports = (env) => {
-  return merge(webpackBaseConfig(env), tankUtilsWebpackConfig(env));
+  return merge(webpackBaseConfig(env), thirdLibWebpackConfig(env));
 };

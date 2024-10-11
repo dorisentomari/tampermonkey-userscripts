@@ -1,0 +1,17 @@
+{
+  "version": "1.0.5",
+  "name": "third.lib",
+  "shortName": "",
+  "title": "全局安装 ",
+  "desc": "全局安装 ",
+  "webpackFileName": "third.lib/webpack.config.js",
+  "moduleMap": {
+    "lodash": {
+      "versionField": "VERSION"
+    },
+    "jquery": {
+      "versionField": "fn.jquery",
+      "version": "3.7.1"
+    }
+  }
+}

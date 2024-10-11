@@ -1,7 +1,6 @@
 const webpack = require('webpack');
-const fs = require('fs');
-const path = require('path');
 const { merge } = require('webpack-merge');
+const { resolve } = require('path');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -18,11 +17,11 @@ const argv = yargs(hideBin(process.argv)).argv;
 
 const { name } = config;
 
-function tankUtilsWebpackConfig(env) {
+function zadpWebpackConfig(env) {
   return {
     mode: 'development',
 
-    entry: path.resolve(paths.appUserscripts, `${name}.tsx`),
+    entry: resolve(paths.appUserscripts, `${name}.tsx`),
 
     output: {
       path: paths.appDist,
@@ -30,8 +29,8 @@ function tankUtilsWebpackConfig(env) {
     },
 
     devServer: {
-      static: path.resolve(paths.appDist, `${name}.js`),
-      port: 4400,
+      static: resolve(paths.appDist, `${name}.js`),
+      port: 4300,
     },
 
     plugins: [
@@ -39,7 +38,6 @@ function tankUtilsWebpackConfig(env) {
         new HtmlWebpackPlugin({
           template: paths.appPublicHtml,
         }),
-
       new webpack.BannerPlugin({
         // 是否仅在入口包中输出 banner 信息
         entryOnly: true,
@@ -54,9 +52,9 @@ function tankUtilsWebpackConfig(env) {
             { type: BannerMap.MATCH_TAB, variable: 'version', value: config.version },
             { type: BannerMap.MATCH_TAB, variable: 'description', value: config.desc },
             { type: BannerMap.MATCH_TAB, variable: 'author', value: commonConfig.userInfo.author },
-            { type: BannerMap.MATCH_TAB, variable: 'match', value: '*://*/*' },
-            { type: BannerMap.MATCH_TAB, variable: 'grant', value: 'none' },
+            { type: BannerMap.MATCH_TAB, variable: 'match', value: 'https://www.zhihu.com/*' },
             { type: BannerMap.MATCH_TAB, variable: 'license', value: 'MIT' },
+            { type: BannerMap.MATCH_TAB, variable: 'grant', value: 'none' },
             { type: BannerMap.PURE_TEXT, text: '==/UserScript==' },
             { type: BannerMap.EMPTY_LINE, lines: 2 },
           ];
@@ -68,5 +66,5 @@ function tankUtilsWebpackConfig(env) {
 }
 
 module.exports = (env) => {
-  return merge(webpackBaseConfig(env), tankUtilsWebpackConfig(env));
+  return merge(webpackBaseConfig(env), zadpWebpackConfig(env));
 };
