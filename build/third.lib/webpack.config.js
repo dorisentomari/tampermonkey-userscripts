@@ -63,7 +63,7 @@ function thirdLibWebpackConfig(env) {
         banner: () => {
           const bannerList = [
             { type: BannerMap.PURE_TEXT, text: '==UserScript==' },
-            { type: BannerMap.MATCH_TAB, variable: 'name', value: config.title },
+            { type: BannerMap.MATCH_TAB, variable: 'name', value: `${lib} ${config.title}` },
             { type: BannerMap.MATCH_TAB, variable: 'namespace', value: 'http://tampermonkey.net' },
             { type: BannerMap.MATCH_TAB, variable: 'lib-name', value: lib },
             { type: BannerMap.MATCH_TAB, variable: 'lib-version', value: version },
